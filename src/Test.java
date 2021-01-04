@@ -7,20 +7,38 @@ public class Test {
 
     public static void main(String[] args) {
 
-        int[] num = new int[]{1, 4, 7, 2, 5, 6, 7};
+        int[] num = new int[]{1,1,2,2,3,3};
 //        maopao(num);
 //        maopao2(num);
 
 //        charu(num);
 //        xuanze(num);
 //        guibing(num, 0, num.length - 1);
-//        stack(num);
 //        kuaisu(num, 0, num.length - 1);
-        System.out.println(linea(num));
+//        stack(num);
+//        System.out.println(linea(num));
+        test(num);
         System.out.println(Arrays.toString(num));
     }
 
+    private static void test(int[] nums){
+        int index = 0;
+        for (int j = 0; j < nums.length; j++) {
+            if(nums[index] != nums[j]){
+                nums[++index] = nums[j];
+            }
+        }
+        System.out.println("index = " + index);
+//        return index +1;
+    }
 
+
+    /**
+     * 三数之和的最大值
+     *
+     * @param num
+     * @return
+     */
     public static int linea(int[] num) {
         int n = num.length;
         if (n == 0) return 0;
@@ -36,6 +54,11 @@ public class Test {
         return dp[n - 1];
     }
 
+    /**
+     * 在解决某个问题的时候，只要求关心最近一次的操作，并且在操作完成了之后，需要向前查找到更前一次的操作。
+     *
+     * @param nums
+     */
     // 利用栈数据结构查找下一个比自己大的数的距离
     public static void stack(int[] nums) {
         // 计算出比当前数据大的间距
@@ -58,6 +81,16 @@ public class Test {
         System.out.println("interval: " + Arrays.toString(interval));
     }
 
+    /**
+     * 快速排序
+     * <p>
+     * 先随机选出一个数字，然后让比它小的，放在左边，比它大的放在右边
+     * 然后再次在左边/右边随机选择一个数字，比他小的放左边，大的放右边，依次递归直到完成
+     *
+     * @param nums
+     * @param low
+     * @param high
+     */
     public static void kuaisu(int[] nums, int low, int high) {
         // 找到一个基准值,比基准值小的数放在左边,比基准值大的数放在右边
         if (low >= high) return;
@@ -67,10 +100,21 @@ public class Test {
     }
 
 
+    /**
+     * 先将随机到的数，放在最后面，
+     * 然后定义两个指针
+     * i: 用来记录比随机值小的数的个数，也就是最终随机值要被还原的位置
+     * j：是当前第一个值
+     *
+     * @param nums
+     * @param low
+     * @param high
+     * @return
+     */
     private static int partition(int[] nums, int low, int high) {
         // 先将最小值,copy 到最后一个位置
         int random = randRang(low, high);
-        System.out.println("random: " + random);
+        System.out.println("random: " + random + " value: " + nums[random]);
         swap(nums, random, high);
         // i 用来记录比中间值小的数的个数,也就是最终 中间值要插入的位置
         int i, j;
@@ -89,6 +133,18 @@ public class Test {
         return new Random().nextInt(high) % (high - low + 1) + low;
     }
 
+    /**
+     * 递归与回溯，
+     * 递归的思想是将一个大的问题，产分成无限小的等价事情，最后将最小等价事情的结果集合并为最终结果集
+     * <p>
+     * 利用二叉树，左右两边同时排序，最后，将两分本在合并一起
+     * <p>
+     * 递归的算法需要注意临界值的判断（往往出现在第一行，否则代码将进入死循环，或报错）
+     *
+     * @param nums
+     * @param low
+     * @param high
+     */
     public static void guibing(int[] nums, int low, int high) {
         if (low >= high) return;
         int mid = (low + high) / 2;
@@ -116,6 +172,11 @@ public class Test {
 
     }
 
+    /**
+     * 在未排序的部分，选择一个最小值，并记录下标，并让他和已排号序的索引最大值进行比较
+     *
+     * @param num
+     */
     public static void xuanze(int[] num) {
         for (int i = 0; i < num.length; i++) {
             int minIndex = i;
@@ -130,6 +191,13 @@ public class Test {
         }
     }
 
+    /**
+     * 将一个数组，插入到已经排好的数组中
+     * 1，2，5，3，6
+     * 1，2，3，5，6
+     *
+     * @param num
+     */
     public static void charu(int[] num) {
         for (int i = 1; i < num.length; i++) {
             int k = i;
@@ -142,6 +210,11 @@ public class Test {
         }
     }
 
+    /**
+     * 冒泡排序，使较小的数字，像气泡一样一个一个从底部冒出来
+     *
+     * @param num
+     */
     public static void maopao2(int[] num) {
         // 将小数向上抛
         for (int i = num.length; i > 1; i--) {
