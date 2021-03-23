@@ -17,6 +17,7 @@ class sort {
     }
 
 
+
     /**
      * 快速排序
      * <p>
@@ -44,7 +45,7 @@ class sort {
      * i: 用来记录比随机值小的数的个数，也就是最终随机值要被还原的位置
      * j：是当前第一个值
      *
-     * @param nums
+     * @param numszuobian
      * @param low
      * @param high
      * @return

@@ -17,6 +17,8 @@ public class array {
         int[] num = new int[]{2, 0};
         int[] num2 = new int[]{1};
         int[] prices = new int[]{7, 1, 5, 3, 6, 4};
+//        int[] prices2 = new int[]{3,4,5,1,2};
+        int[] prices2 = new int[]{3, 1};
 //        maopao(num);
 //        maopao2(num);
 
@@ -36,9 +38,11 @@ public class array {
 //        merge(num, 1, num2, 1);
 //        generate(20);
 //        maxProfit(prices);
-        maxProfit2(prices);
+//        maxProfit2(prices);
+        minArray(prices2);
         System.out.println(Arrays.toString(prices));
     }
+
 
     // 获取最大利润
     private static void maxProfit2(int[] prices) {
@@ -50,7 +54,7 @@ public class array {
             dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
             dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
             for (int[] ints : dp) {
-            System.out.println(Arrays.toString(ints));
+                System.out.println(Arrays.toString(ints));
             }
             System.out.println();
         }
@@ -250,6 +254,34 @@ public class array {
             System.out.println(Arrays.toString(dp));
         }
         return dp[n - 1];
+    }
+
+    public static int minArray(int[] numbers) {
+        // 暴力
+        // int minValue = numbers[0];
+        // for(int i = 1; i < numbers.length; i++){
+        //     minValue = Math.min(minValue, numbers[i]);
+        //     if(numbers[i] < numbers[0]){
+        //         break;
+        //     }
+        // }
+        // return  minValue;
+
+
+        // 二分查找
+        int low = 0;
+        int high = numbers.length - 1;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (numbers[mid] < numbers[high]) {
+                high = mid;
+            } else if (numbers[mid] > numbers[high]) {
+                low = mid + 1;
+            } else {
+                high -= 1;
+            }
+        }
+        return numbers[low];
     }
 
     /**
